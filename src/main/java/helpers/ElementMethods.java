@@ -1,4 +1,4 @@
 package helpers;
 
-public class ElementsMethods {
+public class ElementMethods {
 }
