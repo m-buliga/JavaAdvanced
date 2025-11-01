@@ -1,0 +1,8 @@
+<configuration>
+    <backendConfig>
+        <baseURL>https://api.practicesoftwaretesting.com</baseURL>
+        <contentType>application/json</contentType>
+    </backendConfig>
+    <frontEndConfig> </frontEndConfig>
+    <databaseConfig> </databaseConfig>
+</configuration>

@@ -4,14 +4,17 @@ import api.actions.UserActions;
 import api.model.object.data.request.RequestUser;
 import api.model.object.data.response.ResponseLoginTokenSuccess;
 import api.model.object.data.response.ResponseUserSuccess;
+import core.reporting.ExtentUtility;
+import core.reporting.ReportStep;
 import core.utils.property.PropertyUtility;
+import hooks.ApiTestsHook;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class NewUserApiTest {
+public class NewUserApiTest extends ApiTestsHook {
 
     public RequestUser requestUserBody;
     public String token;
@@ -24,23 +27,22 @@ public class NewUserApiTest {
 
         System.out.println("Step 1: New User");
         newUserApi();
-        System.out.println("----------------");
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Create new user");
 
         System.out.println("Step 2: Login to obtain token");
         generateTokenLoginUser();
-        System.out.println("----------------");
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Login as a new user to obtain the auth token");
 
         System.out.println("Step 3: Retrieve user details");
         retrieveUserDetails();
-        System.out.println("----------------");
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Retrieve user details");
 
         System.out.println("Step 4: Delete specific user as User");
         deleteUserAsUser();
-        System.out.println("----------------");
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Delete user with regular role (expect failure)");
 
-        System.out.println("Step 5: Delete specific user as Admin");
+        System.out.println("Step 5: Delete user with Admin role");
         // deleteAsAdmin
-        System.out.println("----------------");
 
         System.out.println("Step 6: Check that created user was deleted successfully");
         // check again a GET user id with amdin and see that the user no longer exists
