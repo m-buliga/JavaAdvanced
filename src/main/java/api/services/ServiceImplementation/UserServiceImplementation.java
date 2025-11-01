@@ -24,11 +24,15 @@ public class UserServiceImplementation implements UserServiceInterface {
 
     @Override
     public Response retrieveUserDetails(String token, String userId) {
-        return null;
+        userApiService = new UserApiService();
+        String endpoint = "/users/" + userId;
+        return userApiService.get(token, endpoint);
     }
 
     @Override
-    public Response deleteSpecificUser(String token, String userId) {
-        return null;
+    public Response deleteUserAsUser(String token, String userId) {
+        userApiService = new UserApiService();
+        String endpoint = "/users/" + userId;
+        return userApiService.delete(token, endpoint);
     }
 }
