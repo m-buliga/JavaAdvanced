@@ -1,16 +1,20 @@
 package api.base;
 
+
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import core.utils.xml.xmlFile.xmlNode.Configuration;
+import core.utils.xml.xmlFile.GeneralXml;
 
 public class ApiRestBase {
 
     // 1st layer: rest client configuration
 
     private RequestSpecification prepareSpecification(RequestSpecification requestSpecification) {
+        Configuration configuration = GeneralXml.createConfig(Configuration.class);
 
-        requestSpecification.baseUri("https://api.practicesoftwaretesting.com");
-        requestSpecification.contentType("application/json");
+        requestSpecification.baseUri(configuration.backendConfig.baseURL);
+        requestSpecification.contentType(configuration.backendConfig.contentType);
 
         return requestSpecification;
     }
