@@ -11,12 +11,6 @@ public class ApiRestBase {
     // 1st layer: rest client configuration
 
     private RequestSpecification prepareSpecification(RequestSpecification requestSpecification) {
-
-        /*requestSpecification.baseUri("https://api.practicesoftwaretesting.com");
-        requestSpecification.contentType("application/json");
-
-        return requestSpecification;*/
-
         Configuration configuration = GeneralXml.createConfig(Configuration.class);
 
         requestSpecification.baseUri(configuration.backendConfig.baseURL);
