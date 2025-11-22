@@ -53,8 +53,12 @@ public class UserActions {
             Assert.assertEquals(statusCode, ResponseStatuses.STATUS_CODE_NOT_FOUND);
 
             ResponseUserFailed responseUserFailed = response.body().as(ResponseUserFailed.class);
-            System.out.println("Error message: " + responseUserFailed.getMessage());
-            Assert.assertEquals(responseUserFailed.getMessage(), "Requested item not found");
+            String error = responseUserFailed.getError();
+            System.out.println("Message returned: " + responseUserFailed.getMessage());
+            System.out.println("Error returned: " + responseUserFailed.getError());
+
+            Assert.assertNotNull(responseUserFailed.getError());
+            Assert.assertTrue(error.contains("No query results"));
         } else {
             Assert.fail("Unexpected status code " + statusCode);
         }
@@ -65,6 +69,13 @@ public class UserActions {
         Response response = userServiceImplementation.deleteUserAsUser(token, userId);
         Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_FORBIDDEN);
         System.out.println("Admin role is required to delete a specific user");
+
+    }
+
+    public void deleteUserAsAdmin(String adminToken, String userId) {
+        Response response = userServiceImplementation.deleteUserAsUser(adminToken, userId);
+        Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_NO_CONTENT);
+        System.out.println("Deleted user with Admin role: Successful operation");
 
     }
 }
