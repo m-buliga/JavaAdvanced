@@ -1,4 +1,6 @@
 package api.services.ApiService;
 
-public class ContactMessagesService {
+import api.services.CommonApiService;
+
+public class ContactMessagesService extends CommonApiService {
 }

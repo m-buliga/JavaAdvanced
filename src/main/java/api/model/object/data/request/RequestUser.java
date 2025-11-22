@@ -40,9 +40,13 @@ public class RequestUser implements RequestPreparation {
         adjustObjectVariable();
     }
 
+
     public void adjustObjectVariable() {
-        email = email + System.currentTimeMillis() + "@mail.com";
+        if (email != null && email.contains("${timestamp}")) {
+            email = email.replace("${timestamp}", String.valueOf(System.currentTimeMillis()));
+        }
     }
+
 
     public String getFirstName() {
         return firstName;

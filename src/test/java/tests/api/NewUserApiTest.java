@@ -20,6 +20,7 @@ public class NewUserApiTest extends ApiTestsHook {
     public String token;
     public String userId;
     public UserActions userActions;
+    public String adminToken;
 
 
     @Test
@@ -33,8 +34,8 @@ public class NewUserApiTest extends ApiTestsHook {
         generateTokenLoginUser();
         ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Login as a new user to obtain the auth token");
 
-        System.out.println("Step 3: Retrieve user details");
-        retrieveUserDetails();
+        System.out.println("Step 3: Retrieve user details as User");
+        retrieveUserDetailsAsUser();
         ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Retrieve user details");
 
         System.out.println("Step 4: Delete specific user as User");
@@ -42,10 +43,14 @@ public class NewUserApiTest extends ApiTestsHook {
         ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Delete user with regular role (expect failure)");
 
         System.out.println("Step 5: Delete user with Admin role");
-        // deleteAsAdmin
+        getAdminToken();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Get admin token");
+        deleteUserAsAdmin();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Delete user with admin role");
 
-        System.out.println("Step 6: Check that created user was deleted successfully");
-        // check again a GET user id with amdin and see that the user no longer exists
+        System.out.println("Step 6: Check that created user was deleted successfully by Admin user");
+        retrieveUserDetailsAsAdmin();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Created user no longer exists");
     }
 
     public void newUserApi() {
@@ -63,7 +68,7 @@ public class NewUserApiTest extends ApiTestsHook {
         token = responseLoginTokenSuccess.getAccessToken();
     }
 
-    public void retrieveUserDetails() {
+    public void retrieveUserDetailsAsUser() {
         userActions.retrieveUserDetails(token, userId);
     }
 
@@ -71,10 +76,23 @@ public class NewUserApiTest extends ApiTestsHook {
         userActions.deleteUserAsUser(token, userId);
     }
 
-    // deleteAsAdmin - success
+    public void getAdminToken() {
 
-    // GET user id - as admin sa vedem ca chiar l-a sters
-    // pot folosi aceeasi metoda cu if - 204;  else - 404
+        PropertyUtility propertyUtility = new PropertyUtility("request-data/admin-credentials-data");
+        requestUserBody = new RequestUser(propertyUtility.getAllData());
+
+        ResponseLoginTokenSuccess responseLoginTokenSuccess = userActions.responseLoginTokenSuccess(requestUserBody);
+        adminToken = responseLoginTokenSuccess.getAccessToken();
+    }
+
+
+    public void deleteUserAsAdmin() {
+        userActions.deleteUserAsAdmin(adminToken, userId);
+    }
+
+    public void retrieveUserDetailsAsAdmin() {
+        userActions.retrieveUserDetails(adminToken, userId);
+    }
 
 
 }

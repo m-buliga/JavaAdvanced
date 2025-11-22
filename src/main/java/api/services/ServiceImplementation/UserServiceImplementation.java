@@ -35,4 +35,10 @@ public class UserServiceImplementation implements UserServiceInterface {
         String endpoint = "/users/" + userId;
         return userApiService.delete(token, endpoint);
     }
+
+    public Response deleteUserAsAdmin(String adminToken, String userId) {
+        userApiService = new UserApiService();
+        String endpoint = "/users/" + userId;
+        return userApiService.delete(adminToken, endpoint);
+    }
 }
