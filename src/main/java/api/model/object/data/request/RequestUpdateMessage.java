@@ -7,4 +7,8 @@ import lombok.Data;
 public class RequestUpdateMessage {
     @JsonProperty("status")
     private String status;
+
+    public RequestUpdateMessage(String status) {
+        this.status = status;
+    }
 }

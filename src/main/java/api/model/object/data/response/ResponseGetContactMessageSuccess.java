@@ -1,7 +1,6 @@
 package api.model.object.data.response;
 
-import api.model.object.data.MessageDataObject;
-import api.model.object.data.ResponseNotNull;
+import api.model.object.data.MessageUserObject;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -12,40 +11,49 @@ import java.util.List;
 @Getter
 public class ResponseGetContactMessageSuccess implements ResponseNotNull {
 
-    @JsonProperty("current_page")
-    private int current_page;
+    @JsonProperty("id")
+    private String id;
 
-    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    @JsonProperty("data")
-    private List<MessageDataObject> data;
+    @JsonProperty("user_id")
+    private String userId;
 
-    @JsonProperty("from")
-    private int from;
+    @JsonProperty("name")
+    private String name;
 
-    @JsonProperty("last_page")
-    private int last_page;
+    @JsonProperty("email")
+    private String email;
 
-    @JsonProperty("per_page")
-    private int per_page;
+    @JsonProperty("subject")
+    private String subject;
 
-    @JsonProperty("to")
-    private int to;
+    @JsonProperty("message")
+    private String message;
 
-    @JsonProperty("total")
-    private int total;
+    @JsonProperty("status")
+    private String status;
+
+    @JsonProperty("created_at")
+    private String createdAt;
+
+    @JsonProperty("user")
+    private MessageUserObject user;
+
+    @JsonProperty("replies")
+    private List<Object> replies;
+
 
     @Override
     public void validateNotNullFields() {
-        Assert.assertNotNull(current_page);
-        Assert.assertNotNull(from);
-        Assert.assertNotNull(last_page);
-        Assert.assertNotNull(per_page);
-        Assert.assertNotNull(to);
-        Assert.assertNotNull(total);
-
-        for (MessageDataObject messageDataObject : data) {
-            messageDataObject.validateNotNullFields();
-        }
+        Assert.assertNotNull(id);
+        Assert.assertNotNull(userId);
+        Assert.assertNotNull(name);
+        Assert.assertNotNull(email);
+        Assert.assertNotNull(subject);
+        Assert.assertNotNull(message);
+        Assert.assertNotNull(status);
+        Assert.assertNotNull(createdAt);
+        Assert.assertNotNull(user);
+        Assert.assertNotNull(replies);
 
     }
 }

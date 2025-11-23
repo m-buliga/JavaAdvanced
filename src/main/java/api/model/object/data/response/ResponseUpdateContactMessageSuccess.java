@@ -5,13 +5,13 @@ import lombok.Getter;
 import org.testng.Assert;
 
 @Getter
-public class ResponseDeleteUserFailed implements ResponseNotNull {
+public class ResponseUpdateContactMessageSuccess implements ResponseNotNull{
 
-    @JsonProperty("message")
-    private String message;
+    @JsonProperty("success")
+    private Boolean success;
 
     @Override
     public void validateNotNullFields() {
-        Assert.assertNotNull(message);
+        Assert.assertNotNull(success);
     }
 }

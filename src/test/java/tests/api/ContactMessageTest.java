@@ -3,8 +3,12 @@ package tests.api;
 import api.actions.ContactMessageActions;
 import api.actions.UserActions;
 import api.model.object.data.request.RequestContactMessage;
+import api.model.object.data.request.RequestUpdateMessage;
 import api.model.object.data.request.RequestUser;
+import api.model.object.data.response.ResponseGetContactMessageSuccess;
 import api.model.object.data.response.ResponseLoginTokenSuccess;
+import api.model.object.data.response.ResponseNewContactMessageSuccess;
+import api.model.object.data.response.ResponseUpdateContactMessageSuccess;
 import api.model.object.data.response.ResponseUserSuccess;
 import core.reporting.ExtentUtility;
 import core.reporting.ReportStep;
@@ -18,9 +22,10 @@ public class ContactMessageTest extends ApiTestsHook {
     public String token;
     public String userId;
     public UserActions userActions;
-    public String adminToken;
+    public String status;
     public RequestContactMessage requestContactMessageBody;
     public ContactMessageActions contactMessageActions;
+    public String messageId;
 
     @Test
     public void testMethod() {
@@ -36,6 +41,26 @@ public class ContactMessageTest extends ApiTestsHook {
         System.out.println("Step 3: Post new message as User");
         sendNewMessage();
         ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "New message sent by User");
+
+        System.out.println("Step 4: Retrieve newly posted message details");
+        retrieveSpecificMessageDetails();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Get all newly posted message details");
+
+        System.out.println("Step 5: Update status of specific message");
+        updateSpecificMessageStatus();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Update status of specific message");
+
+        System.out.println("Step 6: Retrieve updated message details");
+        retrieveSpecificMessageDetailsAfterUpdate();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Get the updated message details");
+
+        System.out.println("Step 7: Reply to message");
+        //retrieveSpecificMessageDetailsAfterUpdate();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Reply to message");
+
+        System.out.println("Step 8: Login as Admin and delete created User");
+        //retrieveSpecificMessageDetailsAfterUpdate();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Delete created User");
 
     }
 
@@ -55,11 +80,26 @@ public class ContactMessageTest extends ApiTestsHook {
     }
 
     public void sendNewMessage() {
+        contactMessageActions = new ContactMessageActions();
+
         PropertyUtility propertyUtility = new PropertyUtility("request-data/contact-message-data");
         requestContactMessageBody = new RequestContactMessage(propertyUtility.getAllData());
 
-        contactMessageActions = new ContactMessageActions();
-        contactMessageActions.sendNewMessage(token, requestContactMessageBody);
+        ResponseNewContactMessageSuccess responseNewContactMessageSuccessBody = contactMessageActions.sendNewMessage(token, requestContactMessageBody);
+        messageId = responseNewContactMessageSuccessBody.getId();
+    }
+
+    public void retrieveSpecificMessageDetails() {
+        contactMessageActions.retrieveSpecificMessageDetails(token, messageId, "NEW");
+    }
+
+    public void updateSpecificMessageStatus() {
+        contactMessageActions.updateSpecificMessageStatus("IN_PROGRESS", token, messageId);
+
+    }
+
+    public void retrieveSpecificMessageDetailsAfterUpdate() {
+        contactMessageActions.retrieveSpecificMessageDetails(token, messageId, "IN_PROGRESS");
     }
 }
 
