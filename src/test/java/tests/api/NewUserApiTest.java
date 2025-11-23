@@ -8,10 +8,6 @@ import core.reporting.ExtentUtility;
 import core.reporting.ReportStep;
 import core.utils.property.PropertyUtility;
 import hooks.ApiTestsHook;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class NewUserApiTest extends ApiTestsHook {
@@ -73,7 +69,7 @@ public class NewUserApiTest extends ApiTestsHook {
     }
 
     public void deleteUserAsUser() {
-        userActions.deleteUserAsUser(token, userId);
+        userActions.deleteUser(token, userId);
     }
 
     public void getAdminToken() {
@@ -87,7 +83,7 @@ public class NewUserApiTest extends ApiTestsHook {
 
 
     public void deleteUserAsAdmin() {
-        userActions.deleteUserAsAdmin(adminToken, userId);
+        userActions.deleteUser(adminToken, userId);
     }
 
     public void retrieveUserDetailsAsAdmin() {
