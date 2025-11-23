@@ -1,6 +1,5 @@
 package api.model.object.data.request;
 
-import api.model.object.data.RequestPreparation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

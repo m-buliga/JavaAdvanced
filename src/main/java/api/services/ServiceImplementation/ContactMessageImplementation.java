@@ -20,7 +20,9 @@ public class ContactMessageImplementation implements ContactMessageInterface {
 
     @Override
     public Response retrieveSpecificMessageDetails(String token, String messageId) {
-        return null;
+        contactMessagesService = new ContactMessagesService();
+        String endpoint = "/messages/" + messageId;
+        return contactMessagesService.get(token, endpoint);
     }
 
     @Override
@@ -31,6 +33,8 @@ public class ContactMessageImplementation implements ContactMessageInterface {
 
     @Override
     public Response updateSpecificMessageStatus(RequestUpdateMessage body, String token, String messageId) {
-        return null;
+        contactMessagesService = new ContactMessagesService();
+        String endpoint = "/messages/" + messageId + "/status";
+        return contactMessagesService.put(body, endpoint, token);
     }
 }

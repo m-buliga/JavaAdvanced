@@ -1,4 +1,4 @@
-package api.model.object.data;
+package api.model.object.data.request;
 
 import java.util.HashMap;
 
