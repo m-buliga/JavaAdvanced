@@ -7,8 +7,7 @@ import lombok.Data;
 import java.util.HashMap;
 
 @Data
-public class RequestContactMessage implements RequestPreparation {
-
+public class RequestReplyMessage implements RequestPreparation {
     @JsonProperty("name")
     private String name;
 
@@ -21,14 +20,12 @@ public class RequestContactMessage implements RequestPreparation {
     @JsonProperty("message")
     private String message;
 
-    public RequestContactMessage(HashMap<String, String> testData) {
+    public RequestReplyMessage(HashMap<String, String> testData) {
         prepareObject(testData);
     }
 
-
     @Override
     public void prepareObject(HashMap<String, String> testData) {
-
         for (String key : testData.keySet()) {
             switch (key) {
                 case "name":
@@ -45,7 +42,6 @@ public class RequestContactMessage implements RequestPreparation {
                     break;
             }
         }
-
     }
 
 }

@@ -1,11 +1,16 @@
 package api.model.object.data.response;
 
 import api.model.object.data.AddressObject;
+import api.model.object.data.ResponseNotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import org.testng.Assert;
+
 import java.util.List;
 
-public class ResponseUserSuccess {
+@Getter
+public class ResponseUserSuccess implements ResponseNotNull {
 
     @JsonProperty("first_name")
     private String firstName;
@@ -38,43 +43,12 @@ public class ResponseUserSuccess {
     @JsonProperty("address")
     private List<AddressObject> address;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public String getProvider() {
-        return provider;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getTotpEnabled() {
-        return totpEnabled;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public List<AddressObject> getAddress() {
-        return address;
+    @Override
+    public void validateNotNullFields() {
+        Assert.assertNotNull(firstName);
+        Assert.assertNotNull(lastName);
+        Assert.assertNotNull(email);
+        Assert.assertNotNull(id);
+        Assert.assertNotNull(createdAt);
     }
 }

@@ -9,7 +9,6 @@ public interface UserServiceInterface {
     Response reqisterUser(RequestUser body);
     Response generateTokenLoginUser(RequestUser body);
     Response retrieveUserDetails(String token, String userId);
-    Response deleteUserAsUser(String token, String userId);
-    Response deleteUserAsAdmin(String adminToken, String userId);
+    Response deleteUser(String token, String userId);
 
 }

@@ -1,7 +1,9 @@
 package api.model.object.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class AddressObject {
 
     @JsonProperty("street")
@@ -19,23 +21,4 @@ public class AddressObject {
     @JsonProperty("postal_code")
     private String postalCode;
 
-    public String getStreet() {
-        return street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
 }

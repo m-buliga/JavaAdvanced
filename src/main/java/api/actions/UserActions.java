@@ -2,6 +2,7 @@ package api.actions;
 
 import api.base.ResponseStatuses;
 import api.model.object.data.request.RequestUser;
+import api.model.object.data.response.ResponseDeleteUserFailed;
 import api.model.object.data.response.ResponseLoginTokenSuccess;
 import api.model.object.data.response.ResponseUserFailed;
 import api.model.object.data.response.ResponseUserSuccess;
@@ -22,7 +23,7 @@ public class UserActions {
         Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_CREATED);
 
         ResponseUserSuccess responseUserSuccessBody = response.body().as(ResponseUserSuccess.class);
-        //System.out.println("UserId = " + responseUserSuccessBody.getId());
+        responseUserSuccessBody.validateNotNullFields();
         Assert.assertEquals(responseUserSuccessBody.getFirstName(), requestUser.getFirstName());
 
         return responseUserSuccessBody;
@@ -33,7 +34,7 @@ public class UserActions {
         Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_OK);
 
         ResponseLoginTokenSuccess responseLoginTokenSuccess = response.body().as(ResponseLoginTokenSuccess.class);
-        //System.out.println("Token = " + responseLoginTokenSuccess.getAccessToken());
+        responseLoginTokenSuccess.validateNotNullFields();
 
         return responseLoginTokenSuccess;
 
@@ -47,7 +48,7 @@ public class UserActions {
             Assert.assertEquals(statusCode, ResponseStatuses.STATUS_CODE_OK);
 
             ResponseUserSuccess responseUserSuccess = response.body().as(ResponseUserSuccess.class);
-            //System.out.println("Response id = " + responseUserSuccess.getId());
+            responseUserSuccess.validateNotNullFields();
             Assert.assertEquals(responseUserSuccess.getId(), userId);
         } else if (statusCode == ResponseStatuses.STATUS_CODE_NOT_FOUND) {
             Assert.assertEquals(statusCode, ResponseStatuses.STATUS_CODE_NOT_FOUND);
@@ -57,7 +58,7 @@ public class UserActions {
             System.out.println("Message returned: " + responseUserFailed.getMessage());
             System.out.println("Error returned: " + responseUserFailed.getError());
 
-            Assert.assertNotNull(responseUserFailed.getError());
+            responseUserFailed.validateNotNullFields();
             Assert.assertTrue(error.contains("No query results"));
         } else {
             Assert.fail("Unexpected status code " + statusCode);
@@ -65,17 +66,29 @@ public class UserActions {
 
     }
 
-    public void deleteUserAsUser(String token, String userId) {
-        Response response = userServiceImplementation.deleteUserAsUser(token, userId);
-        Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_FORBIDDEN);
-        System.out.println("Admin role is required to delete a specific user");
+    public void deleteUser(String token, String userId) {
 
+        Response response = userServiceImplementation.deleteUser(token, userId);
+
+        int statusCode = response.getStatusCode();
+
+        if (statusCode == ResponseStatuses.STATUS_CODE_NO_CONTENT) {
+            Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_NO_CONTENT);
+            System.out.println("Deleted user with Admin role: Successful operation");
+
+
+        } else if (statusCode == ResponseStatuses.STATUS_CODE_FORBIDDEN) {
+            Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_FORBIDDEN);
+
+            ResponseDeleteUserFailed responseDeleteUserFailed = response.body().as(ResponseDeleteUserFailed.class);
+            String message = responseDeleteUserFailed.getMessage();
+            System.out.println(message + " - Admin role is required to delete a specific user");
+
+            responseDeleteUserFailed.validateNotNullFields();
+            Assert.assertTrue(message.contains("Forbidden"));
+        } else {
+            Assert.fail("Unexpected status code " + statusCode);
+        }
     }
 
-    public void deleteUserAsAdmin(String adminToken, String userId) {
-        Response response = userServiceImplementation.deleteUserAsUser(adminToken, userId);
-        Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_NO_CONTENT);
-        System.out.println("Deleted user with Admin role: Successful operation");
-
-    }
 }

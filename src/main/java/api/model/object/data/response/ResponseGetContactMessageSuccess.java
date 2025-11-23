@@ -1,13 +1,16 @@
 package api.model.object.data.response;
 
-import api.model.object.data.AddressObject;
 import api.model.object.data.MessageDataObject;
+import api.model.object.data.ResponseNotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import org.testng.Assert;
 
 import java.util.List;
 
-public class ResponseContactMessageSuccess {
+@Getter
+public class ResponseGetContactMessageSuccess implements ResponseNotNull {
 
     @JsonProperty("current_page")
     private int current_page;
@@ -31,32 +34,18 @@ public class ResponseContactMessageSuccess {
     @JsonProperty("total")
     private int total;
 
+    @Override
+    public void validateNotNullFields() {
+        Assert.assertNotNull(current_page);
+        Assert.assertNotNull(from);
+        Assert.assertNotNull(last_page);
+        Assert.assertNotNull(per_page);
+        Assert.assertNotNull(to);
+        Assert.assertNotNull(total);
 
-    public int getCurrent_page() {
-        return current_page;
-    }
+        for (MessageDataObject messageDataObject : data) {
+            messageDataObject.validateNotNullFields();
+        }
 
-    public List<MessageDataObject> getData() {
-        return data;
-    }
-
-    public int getFrom() {
-        return from;
-    }
-
-    public int getLast_page() {
-        return last_page;
-    }
-
-    public int getPer_page() {
-        return per_page;
-    }
-
-    public int getTo() {
-        return to;
-    }
-
-    public int getTotal() {
-        return total;
     }
 }
