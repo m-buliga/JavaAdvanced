@@ -1,8 +1,12 @@
 package api.model.object.data.response;
 
+import api.model.object.data.ResponseNotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import org.testng.Assert;
 
-public class ResponseLoginTokenSuccess {
+@Getter
+public class ResponseLoginTokenSuccess implements ResponseNotNull {
     @JsonProperty("access_token")
     private String accessToken;
 
@@ -12,15 +16,10 @@ public class ResponseLoginTokenSuccess {
     @JsonProperty("expires_in")
     private Integer expiresIn;
 
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public String getTokenType() {
-        return tokenType;
-    }
-
-    public Integer getExpiresIn() {
-        return expiresIn;
+    @Override
+    public void validateNotNullFields() {
+        Assert.assertNotNull(accessToken);
+        Assert.assertNotNull(tokenType);
+        Assert.assertNotNull(expiresIn);
     }
 }

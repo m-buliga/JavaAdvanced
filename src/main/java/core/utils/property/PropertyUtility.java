@@ -1,5 +1,7 @@
 package core.utils.property;
 
+import lombok.SneakyThrows;
+
 import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Properties;
@@ -12,14 +14,12 @@ public class PropertyUtility {
     }
 
     // method to upload a file
+    @SneakyThrows(Exception.class)
     private void loadFile(String fileName) {
         properties = new Properties();
-        try {
-            FileInputStream fileInputStream = new FileInputStream("src/test/resources/test-data/" + fileName + ".properties");
-            properties.load(fileInputStream);
-        } catch (Exception ignored) {
+        FileInputStream fileInputStream = new FileInputStream("src/test/resources/test-data/" + fileName + ".properties");
+        properties.load(fileInputStream);
 
-        }
     }
 
     // method to return all data from a file

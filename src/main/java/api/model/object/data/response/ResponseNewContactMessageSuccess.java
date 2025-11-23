@@ -1,16 +1,12 @@
-package api.model.object.data;
+package api.model.object.data.response;
 
+import api.model.object.data.ResponseNotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import org.testng.Assert;
 
-@AllArgsConstructor
-@Data
-public class MessageDataObject implements ResponseNotNull{
-
-    @JsonProperty("user_id")
-    private String userId;
+@Getter
+public class ResponseNewContactMessageSuccess implements ResponseNotNull {
 
     @JsonProperty("name")
     private String name;
@@ -24,6 +20,9 @@ public class MessageDataObject implements ResponseNotNull{
     @JsonProperty("message")
     private String message;
 
+    @JsonProperty("user_id")
+    private String userId;
+
     @JsonProperty("status")
     private String status;
 
@@ -31,18 +30,18 @@ public class MessageDataObject implements ResponseNotNull{
     private String id;
 
     @JsonProperty("created_at")
-    private String createdAt;
+    private String created_at;
 
     @Override
     public void validateNotNullFields() {
-        Assert.assertNotNull(userId);
         Assert.assertNotNull(name);
         Assert.assertNotNull(email);
         Assert.assertNotNull(subject);
         Assert.assertNotNull(message);
+        Assert.assertNotNull(userId);
         Assert.assertNotNull(status);
         Assert.assertNotNull(id);
-        Assert.assertNotNull(createdAt);
+        Assert.assertNotNull(created_at);
 
     }
 }

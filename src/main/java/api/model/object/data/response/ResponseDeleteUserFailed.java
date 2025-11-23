@@ -1,13 +1,18 @@
 package api.model.object.data.response;
 
+import api.model.object.data.ResponseNotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import org.testng.Assert;
 
-public class ResponseDeleteUserFailed {
+@Getter
+public class ResponseDeleteUserFailed implements ResponseNotNull {
 
     @JsonProperty("message")
     private String message;
 
-    public String getMessage() {
-        return message;
+    @Override
+    public void validateNotNullFields() {
+        Assert.assertNotNull(message);
     }
 }

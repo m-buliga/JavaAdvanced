@@ -2,8 +2,11 @@ package api.model.object.data.request;
 
 import api.model.object.data.RequestPreparation;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+
 import java.util.HashMap;
 
+@Data
 public class RequestUser implements RequestPreparation {
 
     @JsonProperty("first_name")
@@ -27,13 +30,17 @@ public class RequestUser implements RequestPreparation {
     public void prepareObject(HashMap<String, String> testData) {
         for (String key : testData.keySet()) {
             switch (key) {
-                case "first_name" : setFirstName(testData.get(key));
+                case "first_name":
+                    setFirstName(testData.get(key));
                     break;
-                case "last_name" : setLastName(testData.get(key));
+                case "last_name":
+                    setLastName(testData.get(key));
                     break;
-                case "email" : setEmail(testData.get(key));
+                case "email":
+                    setEmail(testData.get(key));
                     break;
-                case "password" : setPassword(testData.get(key));
+                case "password":
+                    setPassword(testData.get(key));
                     break;
             }
         }
@@ -47,36 +54,4 @@ public class RequestUser implements RequestPreparation {
         }
     }
 
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String first_name) {
-        this.firstName = first_name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String last_name) {
-        this.lastName = last_name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

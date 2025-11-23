@@ -35,6 +35,19 @@ public class CommonApiService {
         return response;
     }
 
+    public Response put(Object body, String endpoint, String token) {
+
+        // method for a POST with body and token
+        RequestSpecification requestSpecification = RestAssured.given();
+        requestSpecification.header("Authorization", "Bearer" + token);
+        requestSpecification.body(body);
+        ServicesHelper.requestLogs(requestSpecification, endpoint, RequestMethods.REQUEST_PUT);
+
+        Response response = performRequest(RequestMethods.REQUEST_PUT, requestSpecification, endpoint);
+        ServicesHelper.responseLogs(response);
+        return response;
+    }
+
     public Response get(String token, String endpoint) {
 
         // function for a GET method
