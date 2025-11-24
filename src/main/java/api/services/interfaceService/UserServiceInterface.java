@@ -1,4 +1,4 @@
-package api.services.InterfaceService;
+package api.services.interfaceService;
 
 import api.model.object.data.request.RequestUser;
 import io.restassured.response.Response;

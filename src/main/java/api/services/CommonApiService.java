@@ -2,14 +2,17 @@ package api.services;
 
 import api.base.ApiRestBase;
 import api.base.RequestMethods;
+import core.logging.ServicesHelper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import core.logging.ServicesHelper;
 
 public class CommonApiService {
 
     // 2nd layer: define actions on client configurations from layer 1
+    public static final String AUTHORIZATION_HEADER_KEY = "Authorization";
+    private static final String AUTHORIZATION_TYPE = "Bearer";
+
     public Response post(Object body, String endpoint) {
 
         // method for a POST with body
@@ -26,7 +29,7 @@ public class CommonApiService {
 
         // method for a POST with body and token
         RequestSpecification requestSpecification = RestAssured.given();
-        requestSpecification.header("Authorization", "Bearer" + token);
+        requestSpecification.header(AUTHORIZATION_HEADER_KEY, AUTHORIZATION_TYPE + token);
         requestSpecification.body(body);
         ServicesHelper.requestLogs(requestSpecification, endpoint, RequestMethods.REQUEST_POST);
 
@@ -39,7 +42,7 @@ public class CommonApiService {
 
         // method for a POST with body and token
         RequestSpecification requestSpecification = RestAssured.given();
-        requestSpecification.header("Authorization", "Bearer" + token);
+        requestSpecification.header(AUTHORIZATION_HEADER_KEY, AUTHORIZATION_TYPE + token);
         requestSpecification.body(body);
         ServicesHelper.requestLogs(requestSpecification, endpoint, RequestMethods.REQUEST_PUT);
 
@@ -52,7 +55,7 @@ public class CommonApiService {
 
         // function for a GET method
         RequestSpecification requestSpecification = RestAssured.given();
-        requestSpecification.header("Authorization", "Bearer" + token);
+        requestSpecification.header(AUTHORIZATION_HEADER_KEY, AUTHORIZATION_TYPE + token);
         ServicesHelper.requestLogs(requestSpecification, endpoint, RequestMethods.REQUEST_GET);
 
         Response response = performRequest(RequestMethods.REQUEST_GET, requestSpecification, endpoint);
@@ -64,7 +67,7 @@ public class CommonApiService {
 
         // function for a DELETE method
         RequestSpecification requestSpecification = RestAssured.given();
-        requestSpecification.header("Authorization", "Bearer" + token);
+        requestSpecification.header(AUTHORIZATION_HEADER_KEY, AUTHORIZATION_TYPE + token);
         ServicesHelper.requestLogs(requestSpecification, endpoint, RequestMethods.REQUEST_DELETE);
 
 

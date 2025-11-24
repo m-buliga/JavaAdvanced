@@ -62,13 +62,9 @@ public class ServicesHelper {
     public static String getResponseBody(Response response) {
         if (response.getBody() != null) {
             return "Response BODY: " + response.getBody().asPrettyString();
-        }
-        else {
+        } else {
             return "";
         }
     }
-
-
-    // method to log info about a response
 
 }

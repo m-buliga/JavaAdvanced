@@ -6,13 +6,13 @@ import api.model.object.data.response.ResponseDeleteUserFailed;
 import api.model.object.data.response.ResponseLoginTokenSuccess;
 import api.model.object.data.response.ResponseUserFailed;
 import api.model.object.data.response.ResponseUserSuccess;
-import api.services.ServiceImplementation.UserServiceImplementation;
+import api.services.serviceImplementation.UserServiceImplementation;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
 public class UserActions {
 
-    private UserServiceImplementation userServiceImplementation;
+    private final UserServiceImplementation userServiceImplementation;
 
     public UserActions() {
         userServiceImplementation = new UserServiceImplementation();
@@ -50,6 +50,7 @@ public class UserActions {
             ResponseUserSuccess responseUserSuccess = response.body().as(ResponseUserSuccess.class);
             responseUserSuccess.validateNotNullFields();
             Assert.assertEquals(responseUserSuccess.getId(), userId);
+
         } else if (statusCode == ResponseStatuses.STATUS_CODE_NOT_FOUND) {
             Assert.assertEquals(statusCode, ResponseStatuses.STATUS_CODE_NOT_FOUND);
 
@@ -60,6 +61,7 @@ public class UserActions {
 
             responseUserFailed.validateNotNullFields();
             Assert.assertTrue(error.contains("No query results"));
+
         } else {
             Assert.fail("Unexpected status code " + statusCode);
         }
@@ -76,7 +78,6 @@ public class UserActions {
             Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_NO_CONTENT);
             System.out.println("Deleted user with Admin role: Successful operation");
 
-
         } else if (statusCode == ResponseStatuses.STATUS_CODE_FORBIDDEN) {
             Assert.assertEquals(response.getStatusCode(), ResponseStatuses.STATUS_CODE_FORBIDDEN);
 
@@ -86,6 +87,7 @@ public class UserActions {
 
             responseDeleteUserFailed.validateNotNullFields();
             Assert.assertTrue(message.contains("Forbidden"));
+
         } else {
             Assert.fail("Unexpected status code " + statusCode);
         }

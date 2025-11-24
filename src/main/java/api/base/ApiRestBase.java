@@ -1,10 +1,10 @@
 package api.base;
 
 
+import core.utils.xml.xmlFile.GeneralXml;
+import core.utils.xml.xmlFile.xmlNode.Configuration;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import core.utils.xml.xmlFile.xmlNode.Configuration;
-import core.utils.xml.xmlFile.GeneralXml;
 
 public class ApiRestBase {
 
