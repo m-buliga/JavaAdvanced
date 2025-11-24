@@ -15,7 +15,7 @@ public class GeneralXml {
     public static <T> T createConfig(Class<T> klass) {
         JAXBContext jaxbContext = JAXBContext.newInstance(klass);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        return klass.cast(unmarshaller.unmarshal(new File("src/test/resources/atfConfig.xml")));
+        return klass.cast(unmarshaller.unmarshal(new File("src/test/resources/config-files/atfConfig.xml")));
     }
 
 }
