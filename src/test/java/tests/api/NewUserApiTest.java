@@ -52,7 +52,7 @@ public class NewUserApiTest extends ApiTestsHook {
     public void newUserApi() {
         userActions = new UserActions();
 
-        PropertyUtility propertyUtility = new PropertyUtility("request-data/new-user-test-data");
+        propertyUtility = new PropertyUtility("request-data/new-user-test-data");
         requestUserBody = new RequestUser(propertyUtility.getAllData());
 
         ResponseUserSuccess responseUserSuccessBody = userActions.createNewUser(requestUserBody);
@@ -74,7 +74,7 @@ public class NewUserApiTest extends ApiTestsHook {
 
     public void getAdminToken() {
 
-        PropertyUtility propertyUtility = new PropertyUtility("request-data/admin-credentials-data");
+        propertyUtility = new PropertyUtility("request-data/admin-credentials-data");
         requestUserBody = new RequestUser(propertyUtility.getAllData());
 
         ResponseLoginTokenSuccess responseLoginTokenSuccess = userActions.responseLoginTokenSuccess(requestUserBody);

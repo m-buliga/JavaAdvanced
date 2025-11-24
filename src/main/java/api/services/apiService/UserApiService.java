@@ -1,4 +1,4 @@
-package api.services.ApiService;
+package api.services.apiService;
 
 import api.services.CommonApiService;
 

@@ -2,6 +2,7 @@ package hooks;
 
 import core.logging.LoggerUtility;
 import core.reporting.ExtentUtility;
+import core.utils.property.PropertyUtility;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -9,6 +10,7 @@ import org.testng.annotations.BeforeSuite;
 
 public class ApiTestsHook {
     private String testName;
+    public PropertyUtility propertyUtility;
 
     @BeforeSuite
     public void prepareSuite() {
