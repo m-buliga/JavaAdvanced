@@ -12,7 +12,6 @@ import static io.restassured.RestAssured.given;
 
 import java.io.File;
 
-import static io.restassured.RestAssured.given;
 
 public class ContactMessageImplementation implements ContactMessageInterface {
 
@@ -36,7 +35,8 @@ public class ContactMessageImplementation implements ContactMessageInterface {
 
     @Override
     public Response replyToMessage(RequestReplyMessage body, String token, String messageId) {
-        return null;
+        String endpoint = ContactMessageEndpoints.MESSAGE_REPLY + messageId + "/reply";
+        return contactMessagesService.post(body, endpoint, token);
     }
 
     @Override

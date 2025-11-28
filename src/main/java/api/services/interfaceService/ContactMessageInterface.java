@@ -16,6 +16,4 @@ public interface ContactMessageInterface {
     Response replyToMessage(RequestReplyMessage body, String token, String messageId);
     Response updateSpecificMessageStatus(RequestUpdateMessage body, String token, String messageId);
     Response attachFileToMessage(File file, String token, String messageId);
-
-
 }

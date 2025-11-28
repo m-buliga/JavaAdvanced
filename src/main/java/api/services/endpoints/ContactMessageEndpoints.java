@@ -15,6 +15,6 @@ public class ContactMessageEndpoints {
     public static final String MESSAGE_BY_ID = MESSAGE_BASE;
     public static final String MESSAGE_UPDATE_STATUS = MESSAGE_BASE;
     public static final String MESSAGE_ATTACH_FILE = MESSAGE_BASE;
-
+    public static final String MESSAGE_REPLY = MESSAGE_BASE;
 
 }

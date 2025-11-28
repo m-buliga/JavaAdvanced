@@ -3,19 +3,15 @@ package tests.api;
 import api.actions.ContactMessageActions;
 import api.actions.UserActions;
 import api.model.object.data.request.RequestContactMessage;
-import api.model.object.data.request.RequestUpdateMessage;
+import api.model.object.data.request.RequestReplyMessage;
 import api.model.object.data.request.RequestUser;
-import api.model.object.data.response.ResponseAttachFileMessageFailed;
-import api.model.object.data.response.ResponseGetContactMessageSuccess;
 import api.model.object.data.response.ResponseLoginTokenSuccess;
 import api.model.object.data.response.ResponseNewContactMessageSuccess;
-import api.model.object.data.response.ResponseUpdateContactMessageSuccess;
-import api.model.object.data.response.ResponseUserSuccess;
+import api.model.object.data.response.ResponseReplyMessageSuccess;
 import core.reporting.ExtentUtility;
 import core.reporting.ReportStep;
 import core.utils.property.PropertyUtility;
 import hooks.ApiTestsHook;
-import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -27,7 +23,9 @@ public class ContactMessageTest extends ApiTestsHook {
     public UserActions userActions;
     public RequestContactMessage requestContactMessageBody;
     public ContactMessageActions contactMessageActions;
+    public RequestReplyMessage requestReplyMessageBody;
     public String messageId;
+    public String replyId;
 
     @Test
     public void testMethod() {
@@ -59,6 +57,14 @@ public class ContactMessageTest extends ApiTestsHook {
         System.out.println("Step 7: Attach invalid file to message (resulting in error)");
         attachFileToMessageFail();
         ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Attach invalid file to message (resulting in error)");
+
+        System.out.println("Step 8: Reply to a specific message");
+        replyToMessage();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Reply to a specific message");
+
+        System.out.println("Step 8: Retrieve message details after reply and check new reply ID match");
+        retrieveSpecificMessageDetailsAfterReply();
+        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Retrieve message details after reply and check new reply ID match");
 
     }
 
@@ -104,6 +110,20 @@ public class ContactMessageTest extends ApiTestsHook {
     public void attachFileToMessageFail() {
         File file = new File("src/test/resources/upload-files/invalid-file.txt");
         contactMessageActions.attachFileToMessage(file, token, messageId);
+    }
+
+    public void replyToMessage() {
+        contactMessageActions = new ContactMessageActions();
+
+        propertyUtility = new PropertyUtility("request-data/reply-message-data");
+        requestReplyMessageBody = new RequestReplyMessage(propertyUtility.getAllData());
+
+        ResponseReplyMessageSuccess responseReplyMessageSuccessBody = contactMessageActions.replyToMessage(requestReplyMessageBody, token, messageId);
+        replyId = responseReplyMessageSuccessBody.getId();
+    }
+
+    public void retrieveSpecificMessageDetailsAfterReply() {
+        contactMessageActions.retrieveSpecificMessageDetails(token, messageId, "IN_PROGRESS", replyId);
     }
 }
 

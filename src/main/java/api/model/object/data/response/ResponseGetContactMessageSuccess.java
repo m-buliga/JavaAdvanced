@@ -1,12 +1,13 @@
 package api.model.object.data.response;
 
+import api.model.object.data.MessageReplyObject;
 import api.model.object.data.MessageUserObject;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import org.testng.Assert;
 
 import java.util.List;
+
 
 @Getter
 public class ResponseGetContactMessageSuccess implements ResponseNotNull {
@@ -39,7 +40,7 @@ public class ResponseGetContactMessageSuccess implements ResponseNotNull {
     private MessageUserObject user;
 
     @JsonProperty("replies")
-    private List<Object> replies;
+    private List<MessageReplyObject> replies;
 
 
     @Override
