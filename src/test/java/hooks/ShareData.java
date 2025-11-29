@@ -1,9 +1,10 @@
-package ui.share.data.browser;
+package hooks;
 
 import core.logging.LoggerUtilityUi;
 import core.utils.xml.xmlFile.GeneralXml;
 import core.utils.xml.xmlFile.xmlNode.Configuration;
 import org.openqa.selenium.WebDriver;
+import ui.share.data.browser.BrowserFactory;
 
 
 public class ShareData {

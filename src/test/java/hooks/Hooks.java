@@ -1,4 +1,4 @@
-package ui.share.data.browser;
+package hooks;
 
 import core.logging.LoggerUtilityUi;
 import core.reporting.ExtentUtilityUi;

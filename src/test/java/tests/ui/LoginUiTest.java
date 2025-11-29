@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import ui.object.data.ui.LoginObject;
 import ui.pages.AdminHomePage;
 import ui.pages.LoginPage;
-import ui.share.data.browser.Hooks;
+import hooks.Hooks;
 
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
