@@ -31,24 +31,26 @@ public class LoggerUtilityUi {
 
     // 2. a terminat un test
     public static synchronized void endTestCase(String testName) {
-        logger.info("========== Execution ended: " + testName + " ==========");
+        logger.info("========== Execution ended: " + testName + " ==========\n");
     }
 
     // 3. adauga un entry ca log
     public static synchronized void infoLog(String message) {
-        logger.info(Thread.currentThread().getName() + ": " + getCallInfo() + message);
+        logger.info(getCallInfo() + message);
     }
 
     // 4. logheaza o eroare
     public static synchronized void errorLog(String message) {
-        logger.error(Thread.currentThread().getName() + ": " + getCallInfo() + message);
+        logger.error(getCallInfo() + message);
     }
 
     // 5. scoate informatii despre executia curenta
     private static synchronized String getCallInfo() {
-        String clasName = Thread.currentThread().getStackTrace()[2].getClassName();
-        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-        return clasName + ": " + methodName + " ==> ";
+        String className = Thread.currentThread().getStackTrace()[3].getClassName();
+        className = className.substring(className.lastIndexOf('.') + 1);
+
+        String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
+        return className + ": " + methodName + " ==> ";
     }
 
     // 6. ia toate logs individuale si le pune intr-un singur fisier

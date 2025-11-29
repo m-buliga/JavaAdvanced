@@ -27,10 +27,6 @@ public class ElementsMethods {
         element.click();
     }
 
-   /* public void fillElement(WebElement element, String value) {
-        element.sendKeys(value);
-    }*/
-
     public void fillElement(WebElement element, Object value) {
         try {
             waitForVisibilityOfElement(element);
@@ -47,7 +43,6 @@ public class ElementsMethods {
             throw new RuntimeException("Filling element " + element.toString() + " failed.");
         }
     }
-
 
     public WebElement findElementFromListByText(List<WebElement> elementsList, String value) {
         for (WebElement element : elementsList) {

@@ -6,7 +6,7 @@
 
     <DriverConfig>
         <LocalBrowser>chrome</LocalBrowser>
-        <Url>https://api.practicesoftwaretesting.com/</Url>
+        <Url>https://practicesoftwaretesting.com/</Url>
         <Headless>--headless=new</Headless>
         <Resolution>--window-size=1920,1080</Resolution>
         <Gpu>--disable-gpu</Gpu>

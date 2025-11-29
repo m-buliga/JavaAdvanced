@@ -1,5 +1,8 @@
 package ui.share.data.browser;
 
+import core.logging.LoggerUtilityUi;
+import core.utils.xml.xmlFile.GeneralXml;
+import core.utils.xml.xmlFile.xmlNode.Configuration;
 import org.openqa.selenium.WebDriver;
 
 
@@ -12,11 +15,15 @@ public class ShareData {
 
     public void prepareBrowser() {
         driver = new BrowserFactory().getBrowserFactory();
-        //LoggerUtilityUi.infoLog("The browser was successfully opened.");
+
+        Configuration config = GeneralXml.createConfig(Configuration.class);
+        String url = config.driverConfig.url;
+        driver.get(url);
+        LoggerUtilityUi.infoLog("Browser opened and navigated to: " + url);
     }
 
     public void clearBrowser() {
         driver.quit();
-        //LoggerUtilityUi.infoLog("The browser was successfully closed.");
+        LoggerUtilityUi.infoLog("The browser was successfully closed.");
     }
 }

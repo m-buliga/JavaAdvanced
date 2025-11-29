@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
-public class ContactMessageTest extends ApiTestsHook {
+public class ContactMessageApiTest extends ApiTestsHook {
 
     public RequestUser requestUserBody;
     public String token;
