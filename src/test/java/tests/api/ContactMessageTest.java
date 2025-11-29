@@ -8,7 +8,7 @@ import api.model.object.data.request.RequestUser;
 import api.model.object.data.response.ResponseLoginTokenSuccess;
 import api.model.object.data.response.ResponseNewContactMessageSuccess;
 import api.model.object.data.response.ResponseReplyMessageSuccess;
-import core.reporting.ExtentUtility;
+import core.reporting.ExtentUtilityApi;
 import core.reporting.ReportStep;
 import core.utils.property.PropertyUtility;
 import hooks.ApiTestsHook;
@@ -32,39 +32,39 @@ public class ContactMessageTest extends ApiTestsHook {
 
         System.out.println("Step 1: Login as Admin to obtain token");
         getAdminToken();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Login as Admin to obtain the auth token");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Login as Admin to obtain the auth token");
 
         System.out.println("Step 2: Post new message");
         sendNewMessage();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "New message sent by Admin");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "New message sent by Admin");
 
         System.out.println("Step 3: Retrieve newly posted message details");
         retrieveSpecificMessageDetails();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Get all newly posted message details");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Get all newly posted message details");
 
         System.out.println("Step 4: Update status of specific message");
         updateSpecificMessageStatus();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Update status of specific message");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Update status of specific message");
 
         System.out.println("Step 5: Retrieve updated message details");
         retrieveSpecificMessageDetailsAfterUpdate();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Get the updated message details");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Get the updated message details");
 
         System.out.println("Step 6: Successfully attach empty file to message");
         attachFileToMessageSuccess();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Attached empty file to message");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Attached empty file to message");
 
         System.out.println("Step 7: Attach invalid file to message (resulting in error)");
         attachFileToMessageFail();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Attach invalid file to message (resulting in error)");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Attach invalid file to message (resulting in error)");
 
         System.out.println("Step 8: Reply to a specific message");
         replyToMessage();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Reply to a specific message");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Reply to a specific message");
 
-        System.out.println("Step 8: Retrieve message details after reply and check new reply ID match");
+        System.out.println("Step 9: Retrieve message details after reply and check new reply ID match");
         retrieveSpecificMessageDetailsAfterReply();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Retrieve message details after reply and check new reply ID match");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Retrieve message details after reply and check new reply ID match");
 
     }
 

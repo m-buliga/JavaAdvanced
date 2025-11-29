@@ -9,7 +9,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import java.io.File;
 
 
-public class ExtentUtility {
+public class ExtentUtilityApi {
 
     private static ExtentReports extent;
     private static ExtentTest testReport;
@@ -26,7 +26,7 @@ public class ExtentUtility {
 
     public static void initiateReport() {
         createDirectory();
-        ExtentSparkReporter htmlReporter = new ExtentSparkReporter(pathToProject + "ExtentReport.html");
+        ExtentSparkReporter htmlReporter = new ExtentSparkReporter(pathToProject + "ApiExtentReport.html");
         htmlReporter.config().setTheme(Theme.DARK);
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);

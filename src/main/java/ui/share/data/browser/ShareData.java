@@ -1,6 +1,5 @@
 package ui.share.data.browser;
 
-import core.logging.LoggerUtility;
 import org.openqa.selenium.WebDriver;
 
 
@@ -13,11 +12,11 @@ public class ShareData {
 
     public void prepareBrowser() {
         driver = new BrowserFactory().getBrowserFactory();
-        //LoggerUtility.infoLog("The browser was successfully opened.");
+        //LoggerUtilityUi.infoLog("The browser was successfully opened.");
     }
 
     public void clearBrowser() {
         driver.quit();
-        //LoggerUtility.infoLog("The browser was successfully closed.");
+        //LoggerUtilityUi.infoLog("The browser was successfully closed.");
     }
 }

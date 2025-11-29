@@ -1,6 +1,7 @@
-/*
 package ui.share.data.browser;
 
+import core.logging.LoggerUtilityUi;
+import core.reporting.ExtentUtilityUi;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -12,14 +13,14 @@ public class Hooks extends ShareData {
 
     @BeforeSuite
     public void initiateTestReport() {
-        ExtentUtility.initiateReport();
+        ExtentUtilityUi.initiateReport();
     }
 
     @BeforeMethod
     public void prepareEnvironment() {
         testName = this.getClass().getSimpleName();
-        LoggerUtility.startTestCase(testName);
-        ExtentUtility.createTest(testName);
+        LoggerUtilityUi.startTestCase(testName);
+        ExtentUtilityUi.createTest(testName);
         prepareBrowser();
     }
 
@@ -27,18 +28,17 @@ public class Hooks extends ShareData {
     public void clearEnvironment(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             String errorMessage = result.getThrowable().getMessage();
-            LoggerUtility.errorLog(result.getThrowable().getMessage());
-            ExtentUtility.attachLog(testName, errorMessage, getDriver());
+            LoggerUtilityUi.errorLog(result.getThrowable().getMessage());
+            ExtentUtilityUi.attachLog(testName, errorMessage, getDriver());
         }
         clearBrowser();
-        LoggerUtility.endTestCase(testName);
-        ExtentUtility.finishTest(testName);
+        LoggerUtilityUi.endTestCase(testName);
+        ExtentUtilityUi.finishTest(testName);
     }
 
     @AfterSuite
     public void finalizeLogFiles() {
-        LoggerUtility.mergeLogFilesIntoOne();
-        ExtentUtility.generateReport();
+        LoggerUtilityUi.mergeLogFilesIntoOne();
+        ExtentUtilityUi.generateReport();
     }
 }
-*/
