@@ -10,18 +10,18 @@ public class ServicesHelper {
 
     // method to log info about a request
     public static void requestLogs(RequestSpecification requestSpecification, String path, String methodType) {
-        LoggerUtility.infoTest("==== Request Info ====");
-        LoggerUtility.infoTest(getRequestUrl(path));
-        LoggerUtility.infoTest(getRequestMethod(methodType));
-        LoggerUtility.infoTest(getRequestBody(requestSpecification));
+        LoggerUtilityApi.infoTest("==== Request Info ====");
+        LoggerUtilityApi.infoTest(getRequestUrl(path));
+        LoggerUtilityApi.infoTest(getRequestMethod(methodType));
+        LoggerUtilityApi.infoTest(getRequestBody(requestSpecification));
     }
 
     public static void responseLogs(Response response) {
-        LoggerUtility.infoTest("==== Response Info ====");
-        LoggerUtility.infoTest(getResponseStatusLine(response));
-        LoggerUtility.infoTest(getResponseStatusCode(response));
-        LoggerUtility.infoTest(getResponseTime(response));
-        LoggerUtility.infoTest(getResponseBody(response));
+        LoggerUtilityApi.infoTest("==== Response Info ====");
+        LoggerUtilityApi.infoTest(getResponseStatusLine(response));
+        LoggerUtilityApi.infoTest(getResponseStatusCode(response));
+        LoggerUtilityApi.infoTest(getResponseTime(response));
+        LoggerUtilityApi.infoTest(getResponseBody(response));
     }
 
     private static String getRequestUrl(String path) {

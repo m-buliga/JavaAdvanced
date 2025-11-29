@@ -4,7 +4,7 @@ import api.actions.UserActions;
 import api.model.object.data.request.RequestUser;
 import api.model.object.data.response.ResponseLoginTokenSuccess;
 import api.model.object.data.response.ResponseUserSuccess;
-import core.reporting.ExtentUtility;
+import core.reporting.ExtentUtilityApi;
 import core.reporting.ReportStep;
 import core.utils.property.PropertyUtility;
 import hooks.ApiTestsHook;
@@ -24,29 +24,29 @@ public class NewUserApiTest extends ApiTestsHook {
 
         System.out.println("Step 1: New User");
         newUserApi();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Create new user");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Create new user");
 
         System.out.println("Step 2: Login to obtain token");
         generateTokenLoginUser();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Login as a new user to obtain the auth token");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Login as a new user to obtain the auth token");
 
         System.out.println("Step 3: Retrieve user details as User");
         retrieveUserDetailsAsUser();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Retrieve user details");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Retrieve user details");
 
         System.out.println("Step 4: Delete specific user as User");
         deleteUserAsUser();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Delete user with regular role (expect failure)");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Delete user with regular role (expect failure)");
 
         System.out.println("Step 5: Delete user with Admin role");
         getAdminToken();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Get admin token");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Get admin token");
         deleteUserAsAdmin();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Delete user with admin role");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Delete user with admin role");
 
         System.out.println("Step 6: Check that created user was deleted successfully by Admin user");
         retrieveUserDetailsAsAdmin();
-        ExtentUtility.attachReportLog(ReportStep.PASS_STEP, "Created user no longer exists");
+        ExtentUtilityApi.attachReportLog(ReportStep.PASS_STEP, "Created user no longer exists");
     }
 
     public void newUserApi() {

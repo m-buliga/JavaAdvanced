@@ -1,7 +1,7 @@
 package hooks;
 
-import core.logging.LoggerUtility;
-import core.reporting.ExtentUtility;
+import core.logging.LoggerUtilityApi;
+import core.reporting.ExtentUtilityApi;
 import core.utils.property.PropertyUtility;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
@@ -14,24 +14,24 @@ public class ApiTestsHook {
 
     @BeforeSuite
     public void prepareSuite() {
-        ExtentUtility.initiateReport();
+        ExtentUtilityApi.initiateReport();
     }
 
     @BeforeMethod
     public void prepareTest() {
         testName = this.getClass().getSimpleName();
-        LoggerUtility.startTestCase(testName);
-        ExtentUtility.startTest(testName);
+        LoggerUtilityApi.startTestCase(testName);
+        ExtentUtilityApi.startTest(testName);
     }
 
     @AfterClass
     public void clearTest() {
-        LoggerUtility.finishTestCase(testName);
-        ExtentUtility.finishTest(testName);
+        LoggerUtilityApi.finishTestCase(testName);
+        ExtentUtilityApi.finishTest(testName);
     }
 
     @AfterSuite
     public void clearSuite() {
-        ExtentUtility.generateReport();
+        ExtentUtilityApi.generateReport();
     }
 }

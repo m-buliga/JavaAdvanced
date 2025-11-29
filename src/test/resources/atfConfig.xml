@@ -3,6 +3,16 @@
         <baseURL>https://api.practicesoftwaretesting.com</baseURL>
         <contentType>application/json</contentType>
     </backendConfig>
+
+    <DriverConfig>
+        <LocalBrowser>chrome</LocalBrowser>
+        <Url>https://practicesoftwaretesting.com/</Url>
+        <Headless>--headless=new</Headless>
+        <Resolution>--window-size=1920,1080</Resolution>
+        <Gpu>--disable-gpu</Gpu>
+        <Extensions>--disable-extensions</Extensions>
+    </DriverConfig>
+
     <frontEndConfig> </frontEndConfig>
     <databaseConfig> </databaseConfig>
 </configuration>

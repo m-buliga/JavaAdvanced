@@ -9,4 +9,7 @@ public class Configuration {
 
     @XmlElement(name = "backendConfig")
     public BackendConfig backendConfig;
+
+    @XmlElement(name = "DriverConfig")
+    public DriverConfig driverConfig;
 }
