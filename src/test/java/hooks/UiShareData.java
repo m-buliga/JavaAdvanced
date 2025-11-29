@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import ui.share.data.browser.BrowserFactory;
 
 
-public class ShareData {
+public class UiShareData {
     private WebDriver driver;
 
     public WebDriver getDriver() {

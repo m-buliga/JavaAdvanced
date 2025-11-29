@@ -8,7 +8,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
-public class Hooks extends ShareData {
+public class UiTestsHook extends UiShareData {
     public String testName;
 
     @BeforeSuite

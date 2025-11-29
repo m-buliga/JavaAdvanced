@@ -9,13 +9,13 @@ import org.testng.annotations.Test;
 import ui.object.data.ui.LoginObject;
 import ui.pages.AdminHomePage;
 import ui.pages.LoginPage;
-import hooks.Hooks;
+import hooks.UiTestsHook;
 
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 @Slf4j
-public class LoginUiTest extends Hooks {
+public class LoginUiTest extends UiTestsHook {
 
     public LoginObject loginObject;
     public PropertyUtility propertyUtility;
